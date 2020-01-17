@@ -5,18 +5,46 @@ $(document).ready(function(){
 $("#Phone").ForceNumericOnly();
 
 //login page
-	console.log("loaded");
-	
-	$("#LoginButton").on('click', function(){
-		var email = $("#Email").val();
-		var password = $("#Password").val();
-			if (email != "" || password != ""){
-				console.log(email +  " "+password);
+	// console.log("loaded");
+		
+$("#LoginButton").on('click', function(e){
+	e.preventDefault();
+		var Email = $("#LEmail").val();
+		var Password = $("#LPassword").val();
+			if (Email == "" || Password == ""){
+				alert('Please fill the form');
 				
 			}
-			else alert('Please fill the form');
-				
-	});
+			else {
+				$.ajax({
+					url:'login.php',
+					method : 'POST',
+					data : {
+						login : 1,			
+						email : Email,
+						password : Password
+					},
+					success : function(response){
+						console.log(response);
+						console.log("inside ajax");
+						// $("#tname").append(response.Name);
+						if(response.indexOf('success') >= 0){
+							window.location='profile.html';
+
+						}
+						else{
+							$("#wrongpassword").css("display","block");
+						}
+
+			
+					},
+					dataType : 'text'
+						});
+			}
+
+			});
+			
+	
 	
 //rgister page
 
@@ -32,43 +60,76 @@ $("#RegisterButton").on('click', function(){
 	
 		
 		console.log("empty");
-		//   alert('please fill all the fields');
+		  alert('please fill all the fields');
 	}
 
 			else {	
 			
 				console.log("success");	
-					ajaxCall();
+				ajaxRegister();
 				}
 		
 	
-function ajaxCall(){
+function ajaxRegister(){
 	$.ajax({
 	
 		url:'register.php',
 		method : 'POST',
 		data : {
-			register : 1,
-			email : Email,
+			register : 1,			
 			name : Name,
+			email : Email,
 			qualification : Qualification,
 			phonenumber : PhoneNumber,
-			password : Password,
+			password : Password
 			
 		},
 		success : function(response){
 			console.log(response);
-
+			if(response.indexOf('added') >=0 ){
+			// alert('Registration Successfull');
+			swal({
+                title: "Regsitration Successful!",
+                text: 'Thank you for registering!',
+                icon: "success",
+				button: "Login",
+				
+			})
+			.then((value) => {
+					
+				window.location='login.html';
+			
+			
+		});
+			
+			}
+			else{
+				swal({
+					title: "Already Registered!",
+					text: 'Please sign in!',
+					icon: "success",
+					button: "Login",
+					
+				})
+				.then((value) => {
+					
+					window.location='login.html';
+				
+				
+			});
+		}
 		},
 		dataType : 'text'
 			});
 }
 
 
-});
+
 });
 
 
+
+});
 jQuery.fn.ForceNumericOnly =
 function()
 {
