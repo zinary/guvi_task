@@ -20,22 +20,13 @@ if(isset($_POST['login'])){
       $userdata['phone'] = $row['phone'];
       $userdata['dob'] = $row['dob'];
       $userdata['qualification'] = $row['qualification'];
-      // $squalification[] = $row['qualification'];
+      
     }
     
-    // $stmt->close();
 
-    // print("sadd");
-    // $name = $stmt->get_result();
-    // var_dump($name);
-    
-      //  $stmt->store_result(); 
-      
-      // if($stmt->num_rows > 0){
-        //   var_dump($name);
         $jsonData = json_encode($userdata);
         echo($jsonData);
-        // exit('success');
+        
       }
     else {
        
