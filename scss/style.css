@@ -61,6 +61,8 @@ h2{
 padding-top: 5vh;
 }
 
-th{
-	/* font: 2em sans-serif; */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

@@ -1,10 +1,22 @@
-		
+$(document).ready(function(){
+   
+var data = localStorage.getItem('data');
+if(!data){
 $("#LoginButton").on('click', function(e){
-	e.preventDefault();
+    e.preventDefault();
+    
 		var Email = $("#LEmail").val();
 		var Password = $("#LPassword").val();
 			if (Email == "" || Password == ""){
-				alert('Please fill the form');
+                // alert('Please fill the form');
+                swal({
+                    title: "Login Unsuccessful!",
+                    text: 'Please fill all the fields',
+                    icon: "error",
+                    button: "Close",
+             
+                    
+                })
 				
 			}
 			else {
@@ -18,11 +30,9 @@ $("#LoginButton").on('click', function(e){
 					},
 					success : function(response){
 						console.log(response);
-						// console.log("inside ajax");
-                        // $("#tname").append(response.Name);
-                    // localStorage.setItem()
+				
 						if(response.indexOf('name') >= 0){
-                        //    console.log(response.val);
+                       
                         localStorage.setItem('data',response);
 
 							window.location='profile.html';
@@ -54,3 +64,8 @@ $("#LoginButton").on('click', function(e){
                 var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
                 return emailReg.test(validatedemail);
               }
+            }
+            else{
+                window.location='profile.html';
+            }
+        });
