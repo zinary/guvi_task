@@ -6,44 +6,7 @@ $("#Phone").ForceNumericOnly();
 
 //login page
 	// console.log("loaded");
-		
-$("#LoginButton").on('click', function(e){
-	e.preventDefault();
-		var Email = $("#LEmail").val();
-		var Password = $("#LPassword").val();
-			if (Email == "" || Password == ""){
-				alert('Please fill the form');
-				
-			}
-			else {
-				$.ajax({
-					url:'login.php',
-					method : 'POST',
-					data : {
-						login : 1,			
-						email : Email,
-						password : Password
-					},
-					success : function(response){
-						console.log(response);
-						console.log("inside ajax");
-						// $("#tname").append(response.Name);
-						if(response.indexOf('success') >= 0){
-							window.location='profile.html';
 
-						}
-						else{
-							$("#wrongpassword").css("display","block");
-						}
-
-			
-					},
-					dataType : 'text'
-						});
-			}
-
-			});
-			
 	
 	
 //rgister page
@@ -53,20 +16,34 @@ $("#RegisterButton").on('click', function(){
 	var Name = $("#Name").val();
 	var Qualification = $("#Qualification").val();
 	var PhoneNumber = $("#Phone").val();
+	var DOB = $("#dob").val();
 	var Password = $("#Password").val();
 	
 
-	if (Email == "" || Name == "" || PhoneNumber == "" || Password == "" || Qualification == "" ){
+	if (Email == "" || Name == "" || PhoneNumber == "" || Password == "" || Qualification == "" || DOB == ""){
 	
 		
 		console.log("empty");
 		  alert('please fill all the fields');
+
 	}
 
 			else {	
-			
-				console.log("success");	
+
+				 if(  !validateEmail(Email)) {
+                                
+				$("#wrongemail1").css("display","block");
+				
+
+			 }
+			 else{
+				$("#wrongemail1").css("display","none");
 				ajaxRegister();
+			 }
+				
+				// console.log("success");	
+
+				
 				}
 		
 	
@@ -81,6 +58,7 @@ function ajaxRegister(){
 			email : Email,
 			qualification : Qualification,
 			phonenumber : PhoneNumber,
+			dob : DOB,
 			password : Password
 			
 		},
@@ -130,6 +108,11 @@ function ajaxRegister(){
 
 
 });
+
+function validateEmail(validatedemail) {
+	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	return emailReg.test(validatedemail);
+  }
 jQuery.fn.ForceNumericOnly =
 function()
 {

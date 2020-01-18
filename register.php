@@ -14,6 +14,7 @@ if(isset($_POST['register'])){
       $email = mysqli_real_escape_string($connection, $_POST['email']); 
       $qualification=mysqli_real_escape_string($connection,$_POST['qualification']);
       $number=mysqli_real_escape_string($connection,$_POST['phonenumber']);
+      $dob=mysqli_real_escape_string($connection,$_POST['dob']);
       $userpassword =mysqli_real_escape_string($connection, sha1($_POST['password']));
 
       $stmt = $connection->prepare('SELECT email FROM details WHERE email=? LIMIT 1');
@@ -24,8 +25,8 @@ if(isset($_POST['register'])){
       $rnum=$stmt->num_rows;
           if($rnum==0){
 
-$stmt = $connection->prepare('INSERT INTO `details`(`name`, `email`, `qualification`, `phone`, `password`) VALUES (?,?,?,?,?)' );
-$stmt->bind_param("sssss",$name,$email,$qualification, $number,$userpassword);
+$stmt = $connection->prepare('INSERT INTO `details`(`name`, `email`, `qualification`, `phone`,`dob`, `password`) VALUES (?,?,?,?,?,?)' );
+$stmt->bind_param("ssssss",$name,$email,$qualification, $number,$dob,$userpassword);
 $stmt->execute();
 
 // echo "Registration Successful sql";
@@ -45,6 +46,7 @@ $extra = array(
     'email'=>$_POST['email'],
     'qualification'=>$_POST['qualification'],
     'number'=>$_POST['phonenumber'],
+    'dob'=>$_POST['dob'],
     'password'=>sha1($_POST['password'])
 
 );
