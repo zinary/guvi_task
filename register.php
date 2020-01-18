@@ -1,13 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "userdata";
+require_once('dbconnection.php');
 
-$connection = new mysqli($servername, $username, $password, $dbname);
-if ($connection->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 if(isset($_POST['register'])){
       
       $name=mysqli_real_escape_string($connection,$_POST['name']);
@@ -26,7 +19,7 @@ if(isset($_POST['register'])){
           if($rnum==0){
 
 $stmt = $connection->prepare('INSERT INTO `details`(`name`, `email`, `qualification`, `phone`,`dob`, `password`) VALUES (?,?,?,?,?,?)' );
-$stmt->bind_param("ssssss",$name,$email,$qualification, $number,$dob,$userpassword);
+$stmt->bind_param("ssssss",$name,$email,$qualification,$number,$dob,$userpassword);
 $stmt->execute();
 
 // echo "Registration Successful sql";

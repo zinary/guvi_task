@@ -2,7 +2,7 @@
 $(document).ready(function(){
 
 
-$("#Phone").ForceNumericOnly();
+// $("#Phone").ForceNumericOnly();
 
 //login page
 	// console.log("loaded");
@@ -75,7 +75,7 @@ function ajaxRegister(){
 			})
 			.then((value) => {
 					
-				window.location='login.html';
+				window.location='index.html';
 			
 			
 		});
@@ -113,24 +113,24 @@ function validateEmail(validatedemail) {
 	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 	return emailReg.test(validatedemail);
   }
-jQuery.fn.ForceNumericOnly =
-function()
-{
-    return this.each(function()
-    {
-        $(this).keydown(function(e)
-        {
-            var key = e.charCode || e.keyCode || 0; 
-            return (
-                key == 8 || 
-                key == 9 ||
-                key == 13 ||
-                key == 46 ||
-                key == 110 ||
-                key == 190 ||
-                (key >= 35 && key <= 40) ||
-                (key >= 48 && key <= 57) ||
-                (key >= 96 && key <= 105));
-        });
-    });
-};
+// jQuery.fn.ForceNumericOnly =
+// function()
+// {
+//     return this.each(function()
+//     {
+//         $(this).keydown(function(e)
+//         {
+//             var key = e.charCode || e.keyCode || 0; 
+//             return (
+//                 key == 8 || 
+//                 key == 9 ||
+//                 key == 13 ||
+//                 key == 46 ||
+//                 key == 110 ||
+//                 key == 190 ||
+//                 (key >= 35 && key <= 40) ||
+//                 (key >= 48 && key <= 57) ||
+//                 (key >= 96 && key <= 105));
+//         });
+//     });
+// };

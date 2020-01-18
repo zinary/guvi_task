@@ -25,7 +25,7 @@ else{
     })
     .then((value) => {
             
-        window.location='login.html';
+        window.location='index.html';
     
     
 });
